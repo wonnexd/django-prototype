@@ -1,0 +1,30 @@
+{% if latest_blog %}
+    <ul>
+{% for Blogeintrag in page_obj %}
+    <li>{{ Blogeintrag.title }}</li>
+    <li>{{ Blogeintrag.previewtext }}</li>
+    <li><a href="{% url 'blog:blogdetail' Blogeintrag.id %}">Mehr lesen</a></li></br>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Blogs are available.</p>
+{% endif %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1"><button type="button">First Page</button></a>
+            <a href="?page={{ page_obj.previous_page_number }}"><button type="button">Previous Page</button></a>
+        {% endif %}
+
+        <span class="current">
+            <p> Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }} </p>
+        </span>
+
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><button type="button">Next Page</button></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}"><button type="button">Last Page</button></a>
+        {% endif %}
+    </span>
+</div>
