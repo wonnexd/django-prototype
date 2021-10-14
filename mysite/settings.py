@@ -121,10 +121,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# productionemail
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'lanweilig11@googlemail.com'
 EMAIL_HOST_PASSWORD = 'rgnwcgzggmaetrya'
 EMAIL_USE_TLS = True
 
+# development für ckeditor
 STATIC_ROOT = "/var/www/example.com/static/"
