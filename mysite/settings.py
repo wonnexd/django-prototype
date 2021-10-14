@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,5 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'lanweilig11@googlemail.com'
 EMAIL_HOST_PASSWORD = 'rgnwcgzggmaetrya'
 EMAIL_USE_TLS = True
+
+STATIC_ROOT = "/var/www/example.com/static/"

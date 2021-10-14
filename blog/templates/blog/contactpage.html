@@ -1,5 +1,10 @@
+{% extends 'startpage.html' %}
+
+
+{% block content %}
 <form action="/polls/contactpage" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit">
 </form>
+{% endblock content %}
