@@ -5,13 +5,16 @@ from ckeditor.fields import RichTextField
 class Blogeintrag(models.Model):
     title = models.CharField(max_length=200, default="")
     maintext  = RichTextField(null=True)
-    previewtext = models.CharField(max_length=500, default="")
-    sidetext = models.CharField(max_length=500, default="")
+    previewtext = RichTextField(null=True)
+    sidetext = RichTextField(null=True)
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
             return self.title
 
+class Startseite(models.Model):
+    inhalt = RichTextField(null=True)
+     
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)

@@ -6,12 +6,19 @@ from django.core.paginator import Paginator
 from django.core.mail import BadHeaderError, send_mail
 
 from .forms import ContactForm 
-from .models import Blogeintrag, Choice, Question
+from .models import Blogeintrag, Choice, Question, Startseite
 
-def index(request):
+def home(request):
+    startseite_query = Startseite.objects.all()
+    context = {
+        'startseite_query': startseite_query
+    }
+    return render(request, 'blog/home.html', context)
+
+def umfrage(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
-    return render(request, 'blog/index.html', context)
+    return render(request, 'blog/umfrage.html', context)
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -53,8 +60,12 @@ def blog(request):
     return render(request, 'blog/blog.html', context)
 
 def blogdetail(request, blogeintrag_id):
+    latest_blog = Blogeintrag.objects.order_by('-pub_date')
     blogeintrag = get_object_or_404(Blogeintrag, pk=blogeintrag_id)
-    context = {'blogeintrag': blogeintrag}
+    context = {
+        'blogeintrag': blogeintrag,
+        'latest_blog': latest_blog,      
+    }
     return render(request, 'blog/blogdetail.html', context)
 
 def contactpage(request):

@@ -5,21 +5,21 @@ class ContactForm(forms.Form):
 	subject = forms.CharField(widget=forms.TextInput(
 		attrs={
 			'class': 'form-control',
-			'style': 'width: 1000px',
+			'style': 'width: 100%',
 			'placeholder' :'Worum geht es?',
 			}
 	))
 	from_email = forms.CharField(widget=forms.EmailInput(
 		attrs={
 			'class': 'form-control',
-			'style': 'width: 1000px',
+			'style': 'width: 100%',
 			'placeholder' :'Emailadresse',
 			}
 	))
 	message = forms.CharField(widget=forms.Textarea(
 		attrs={
 			'class': 'form-control',
-			'style': 'width: 1000px',
+			'style': 'width: 100%',
 			'placeholder' :'Ihre Nachricht hier',
 			}
 	))

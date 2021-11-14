@@ -1,35 +1,65 @@
 {% extends 'startpage.html' %}
 
-
 {% block content %}
+
+<div class="row mt-5">
+    <div class="col-sm-12 col-lg-8">
 {% if latest_blog %}
-    <ul>
+
 {% for Blogeintrag in page_obj %}
-    <li>{{ Blogeintrag.title }}</li>
-    <li>{{ Blogeintrag.previewtext }}</li>
-    <li><a href="{% url 'blog:blogdetail' Blogeintrag.id %}">Mehr lesen</a></li></br>
+<div class="mb-5">
+    <h3 class="d-flex justify-content-center"> 
+        {{ Blogeintrag.title }}
+    </h3>     
+    <p>{{ Blogeintrag.previewtext|safe }} </p>
+    <a href="{% url 'blog:blogdetail' Blogeintrag.id %}">Mehr lesen</a>
+</div>
     {% endfor %}
-    </ul>
+
 {% else %}
     <p>No Blogs are available.</p>
 {% endif %}
 
-<div class="pagination">
+<div class="pagination mt-3">
     <span class="step-links">
+
         {% if page_obj.has_previous %}
-            <a href="?page=1"><button type="button">First Page</button></a>
-            <a href="?page={{ page_obj.previous_page_number }}"><button type="button">Previous Page</button></a>
+            <a href="?page=1"><button type="button" class="btn btn-secondary">&laquo; first</button></a>
+            <a href="?page={{ page_obj.previous_page_number }}"><button type="button" class="btn btn-secondary">previous</button></a>
         {% endif %}
-
-        <span class="current">
-            <p> Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }} </p>
-        </span>
-
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}"><button type="button">Next Page</button></a>
-            <a href="?page={{ page_obj.paginator.num_pages }}"><button type="button">Last Page</button></a>
+        <a href="?page={{ page_obj.next_page_number }}"><button type="button" class="btn btn-secondary">next</button></a>
+
+        <a href="?page={{ page_obj.paginator.num_pages }}"><button type="button" class="btn btn-secondary">last &raquo;</button></a>
         {% endif %}
+
+        <div class="current mt-3">
+            <p> Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }} </p>
+        </div>
+
     </span>
 </div>
+</div>
+
+<div class="col-sm-12 col-lg-3">
+    <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-5">
+        <div class="list-group list-group-flush border-bottom scrollarea">
+
+            {% for Blogeintrag in latest_blog %}
+            <a href="{% url 'blog:blogdetail' Blogeintrag.id %}" class="list-group-item list-group-item-action lh-tight pad-zero" aria-current="true">
+                <div class="d-flex w-100 align-items-center justify-content-between">
+                    <strong class="mb-1">List group item heading</strong>
+                    <small>Wed</small>
+                </div>
+                <div class="col-10 mb-1 small"> {{ Blogeintrag.sidetext|safe }} </div>
+            </a>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+</div>
+
 {% endblock content %}
+
