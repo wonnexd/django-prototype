@@ -1,46 +1,38 @@
-{% extends 'startpage.html' %}
+{% extends 'basetemplate.html' %}
 
 {% block content %}
 
-
 <div class="row mt-5">
-        <div class="col-sm-12 col-lg-8">
+    <div class="col-sm-12 col-lg-9">
+        <h1 class="text-center">
+            {{ blogeintrag.title }}
+        </h1>
+        {{ blogeintrag.maintext|safe }}
+        </br>
+        {{ blogeintrag.pub_date}}
+        </br>
+        <a href="{% url 'blog:blog' %}">
+            <button type="button" class="btn btn-secondary mt-3 mb-3">
+                Zurück zu allen Blogs
+            </button>
+        </a>
+    </div>
 
-            <h3 class="text-center"> {{ blogeintrag.title }} </h3>
-                {{ blogeintrag.maintext|safe }}
-                {{ blogeintrag.pub_date}}
+    <div class="col-sm-12 col-lg-3">
+        {% for Blogeintrag in latest_blog %}
+        <div class="list-group">
+            <a href="{% url 'blog:blogdetail' Blogeintrag.id %}" class="list-group-item list-group-item-action"
+                aria-current="true">
 
-            <a href="{% url 'blog:blog' %}">
-                <button type="button" class="btn btn-secondary mt-3 mb-3">
-                    Zurück zu allen Blogs
-                </button>
-            </a>
-            
-        </div>
-        <div class="col-sm-12 col-lg-3">
-            <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-5">
-                <div class="list-group list-group-flush border-bottom scrollarea">
-        
-                    {% for Blogeintrag in latest_blog %}
-                    <a href="{% url 'blog:blogdetail' Blogeintrag.id %}" class="list-group-item list-group-item-action lh-tight pad-zero" aria-current="true">
-                        <div class="d-flex w-100 align-items-center justify-content-between">
-                            <strong class="mb-1">List group item heading</strong>
-                            <small>Wed</small>
-                        </div>
-                        <div class="col-10 mb-1 small"> {{ Blogeintrag.sidetext|safe }} </div>
-                    </a>
-                    {% endfor %}
-        
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ Blogeintrag.title }}</h5>
+                    <small>3 days ago</small>
                 </div>
-            </div>
+                <p class="mb-1">{{ Blogeintrag.sidetext|safe }} </p>
+            </a>
         </div>
-        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock content %}
-
-</body>
-
-
-
-
-

@@ -1,12 +1,11 @@
-{% extends 'startpage.html' %}
+{% extends 'basetemplate.html' %}
 
 {% block content %}
 
 {% for Startseite in startseite_query %}
 <div class="mt-5">
-{{  Startseite.inhalt|safe }} 
+    {{ Startseite.inhalt|safe }}
 </div>
 {% endfor %}
 
 {% endblock content %}
-

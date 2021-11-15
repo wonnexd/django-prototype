@@ -1,9 +1,15 @@
+{% extends 'basetemplate.html' %}
+
+{% block content %}
+
 {% if latest_question_list %}
-    <ul>
+<ul>
     {% for question in latest_question_list %}
     <li><a href="{% url 'blog:detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
-    </ul>
+</ul>
 {% else %}
-    <p>No polls are available.</p>
+<p>No polls are available.</p>
 {% endif %}
+
+{% endblock content %}

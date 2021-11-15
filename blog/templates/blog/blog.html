@@ -1,65 +1,64 @@
-{% extends 'startpage.html' %}
+{% extends 'basetemplate.html' %}
 
 {% block content %}
 
 <div class="row mt-5">
-    <div class="col-sm-12 col-lg-8">
-{% if latest_blog %}
+    <div class="col-sm-12 col-lg-9">
+        {% if latest_blog %}
 
-{% for Blogeintrag in page_obj %}
-<div class="mb-5">
-    <h3 class="d-flex justify-content-center"> 
-        {{ Blogeintrag.title }}
-    </h3>     
-    <p>{{ Blogeintrag.previewtext|safe }} </p>
-    <a href="{% url 'blog:blogdetail' Blogeintrag.id %}">Mehr lesen</a>
-</div>
-    {% endfor %}
-
-{% else %}
-    <p>No Blogs are available.</p>
-{% endif %}
-
-<div class="pagination mt-3">
-    <span class="step-links">
-
-        {% if page_obj.has_previous %}
-            <a href="?page=1"><button type="button" class="btn btn-secondary">&laquo; first</button></a>
-            <a href="?page={{ page_obj.previous_page_number }}"><button type="button" class="btn btn-secondary">previous</button></a>
-        {% endif %}
-
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}"><button type="button" class="btn btn-secondary">next</button></a>
-
-        <a href="?page={{ page_obj.paginator.num_pages }}"><button type="button" class="btn btn-secondary">last &raquo;</button></a>
-        {% endif %}
-
-        <div class="current mt-3">
-            <p> Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }} </p>
+        {% for Blogeintrag in page_obj %}
+        <div>
+            <h1 class="text-center">
+                {{ Blogeintrag.title }}
+            </h1>
+            {{ Blogeintrag.previewtext|safe }}
+            </br>
+            {{ Blogeintrag.pub_date}}
+            </br>
+            <a href="{% url 'blog:blogdetail' Blogeintrag.id %}">Mehr lesen</a>
         </div>
+        {% endfor %}
 
-    </span>
-</div>
-</div>
+        {% else %}
+        <p>No Blogs are available.</p>
+        {% endif %}
 
-<div class="col-sm-12 col-lg-3">
-    <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white mt-5">
-        <div class="list-group list-group-flush border-bottom scrollarea">
+        <div class="pagination mt-3">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                <a href="?page=1"><button type="button" class="btn btn-secondary">&laquo; first</button></a>
+                <a href="?page={{ page_obj.previous_page_number }}"><button type="button"
+                        class="btn btn-secondary">previous</button></a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"><button type="button"
+                        class="btn btn-secondary">next</button></a>
 
-            {% for Blogeintrag in latest_blog %}
-            <a href="{% url 'blog:blogdetail' Blogeintrag.id %}" class="list-group-item list-group-item-action lh-tight pad-zero" aria-current="true">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                    <strong class="mb-1">List group item heading</strong>
-                    <small>Wed</small>
+                <a href="?page={{ page_obj.paginator.num_pages }}"><button type="button" class="btn btn-secondary">last
+                        &raquo;</button></a>
+                {% endif %}
+                <div class="current mt-3">
+                    <p> Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }} </p>
                 </div>
-                <div class="col-10 mb-1 small"> {{ Blogeintrag.sidetext|safe }} </div>
-            </a>
-            {% endfor %}
-
+            </span>
         </div>
     </div>
-</div>
+
+    <div class="col-sm-12 col-lg-3">
+        {% for Blogeintrag in latest_blog %}
+        <div class="list-group">
+            <a href="{% url 'blog:blogdetail' Blogeintrag.id %}" class="list-group-item list-group-item-action"
+                aria-current="true">
+
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ Blogeintrag.title }}</h5>
+                    <small>3 days ago</small>
+                </div>
+                <p class="mb-1">{{ Blogeintrag.sidetext|safe }} </p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock content %}
-
