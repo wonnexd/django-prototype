@@ -11,10 +11,8 @@
             <h1 class="text-center">
                 {{ Blogeintrag.title }}
             </h1>
+            </br>
             {{ Blogeintrag.previewtext|safe }}
-            </br>
-            {{ Blogeintrag.pub_date}}
-            </br>
             <a href="{% url 'blog:blogdetail' Blogeintrag.id %}">Mehr lesen</a>
         </div>
         {% endfor %}

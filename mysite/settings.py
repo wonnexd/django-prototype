@@ -130,3 +130,5 @@ EMAIL_USE_TLS = True
 
 # development für ckeditor
 STATIC_ROOT = "/var/www/example.com/static/"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

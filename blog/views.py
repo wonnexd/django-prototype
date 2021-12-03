@@ -54,7 +54,7 @@ def results(request, question_id):
 
 
 def blog(request):
-    latest_blog = Blogeintrag.objects.order_by("-pub_date")
+    latest_blog = Blogeintrag.objects.order_by("-pub_date")[:3]
     paginator = Paginator(latest_blog, 2)
 
     page_number = request.GET.get("page")
@@ -68,7 +68,7 @@ def blog(request):
 
 
 def blogdetail(request, blogeintrag_id):
-    latest_blog = Blogeintrag.objects.order_by("-pub_date")
+    latest_blog = Blogeintrag.objects.order_by("-pub_date")[:3]
     blogeintrag = get_object_or_404(Blogeintrag, pk=blogeintrag_id)
     context = {
         "blogeintrag": blogeintrag,
@@ -92,7 +92,7 @@ def contactpage(request):
                     )
                 except BadHeaderError:
                     return HttpResponse("Invalid header found.")
-                return HttpResponseRedirect("/polls/contactpage")
+                return HttpResponseRedirect("/blog/")
             else:
                 form = ContactForm()
                 return HttpResponse("Make sure all fields are entered and valid.")

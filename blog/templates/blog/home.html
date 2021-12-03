@@ -1,11 +1,23 @@
 {% extends 'basetemplate.html' %}
 
+{% load static %}
+
 {% block content %}
 
-{% for Startseite in startseite_query %}
-<div class="mt-5">
-    {{ Startseite.inhalt|safe }}
+<div class="row mt-3 mb-3">
+    <div class="col-sm-12 col-lg-8">
+        {% for Startseite in startseite_query %}
+
+        {{ Startseite.inhalt|safe }}
+
+        {% endfor %}
+    </div>
+    <div class="col-sm-12 col-lg-1">
+
+    </div>
+    <div class="col-sm-12 col-lg-3">
+        <img src="{% static 'blog/images/IMG_0105opt.jpg' %}" class="img-fluid img-thumbnail" alt="...">
+    </div>
 </div>
-{% endfor %}
 
 {% endblock content %}
