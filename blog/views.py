@@ -54,8 +54,8 @@ def results(request, question_id):
 
 
 def blog(request):
-    latest_blog = Blogeintrag.objects.order_by("-pub_date")[:3]
-    paginator = Paginator(latest_blog, 2)
+    latest_blog = Blogeintrag.objects.order_by("-view_counter")[:3]
+    paginator = Paginator(latest_blog, 3)
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -68,9 +68,15 @@ def blog(request):
 
 
 def blogdetail(request, blogeintrag_id):
-    latest_blog = Blogeintrag.objects.order_by("-pub_date")[:3]
+    latest_blog = Blogeintrag.objects.order_by("-view_counter")[:3]
     blogeintrag = get_object_or_404(Blogeintrag, pk=blogeintrag_id)
+
+    blog_object = Blogeintrag.objects.get(id=blogeintrag_id)
+    blog_object.view_counter = blog_object.view_counter + 1
+    blog_object.save()
+
     context = {
+        "blog_object": blog_object,
         "blogeintrag": blogeintrag,
         "latest_blog": latest_blog,
     }

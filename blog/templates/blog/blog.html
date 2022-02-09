@@ -43,20 +43,25 @@
     </div>
 
     <div class="col-sm-12 col-lg-3">
+        <h3 class="text-center fst-italic"> Most Viewed </h3>
         {% for Blogeintrag in latest_blog %}
         <div class="list-group">
             <a href="{% url 'blog:blogdetail' Blogeintrag.id %}" class="list-group-item list-group-item-action"
                 aria-current="true">
-
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ Blogeintrag.title }}</h5>
-                    <small>3 days ago</small>
+                <div class="row mb-3">
+                    <div class="col-8">
+                        <h4 class="mb-1">{{ Blogeintrag.title }}</h4>
+                    </div>
+                    <div class="col-4">
+                        <small>{{ Blogeintrag.pub_date|timesince }} ago</small>
+                    </div>
                 </div>
                 <p class="mb-1">{{ Blogeintrag.sidetext|safe }} </p>
             </a>
         </div>
         {% endfor %}
     </div>
+
 </div>
 
 {% endblock content %}
