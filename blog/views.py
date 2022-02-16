@@ -7,10 +7,6 @@ from django.core.mail import BadHeaderError, send_mail
 from .forms import ContactForm
 from .models import Blogeintrag, Choice, Question, Startseite
 
-# matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
-
 
 def home(request):
     startseite_query = Startseite.objects.all()
@@ -66,12 +62,6 @@ def results(request, question_id):
 
     choice_d = Choice.objects.get(id=4)
     answer_d = choice_d.votes
-
-    y = np.array([answer_a, answer_b, answer_c, answer_d])
-    mylabels = ["Java", "C++", "Python", "Javascript"]
-
-    plt.pie(y, labels=mylabels, startangle=90)
-    plt.show()
 
     context = {
         "question": question,
