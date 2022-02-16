@@ -128,10 +128,15 @@ def contactpage(request):
                     )
                 except BadHeaderError:
                     return HttpResponse("Invalid header found.")
-                return HttpResponseRedirect("/blog/")
+                return HttpResponseRedirect("response_email")
             else:
                 form = ContactForm()
-                return HttpResponse("Make sure all fields are entered and valid.")
+                return HttpResponseRedirect("response_email")
 
     context = {"form": form}
     return render(request, "blog/contactpage.html", context)
+
+
+def response_email(request):
+    context = {}
+    return render(request, "blog/response_email.html", context)
