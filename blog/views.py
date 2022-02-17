@@ -51,24 +51,8 @@ def vote(request, question_id):
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
 
-    choice_a = Choice.objects.get(id=1)
-    answer_a = choice_a.votes
-
-    choice_b = Choice.objects.get(id=2)
-    answer_b = choice_b.votes
-
-    choice_c = Choice.objects.get(id=3)
-    answer_c = choice_c.votes
-
-    choice_d = Choice.objects.get(id=4)
-    answer_d = choice_d.votes
-
     context = {
         "question": question,
-        "answer_a": answer_a,
-        "answer_b": answer_b,
-        "answer_c": answer_c,
-        "answer_d": answer_d,
     }
     return render(request, "blog/results.html", context)
 
