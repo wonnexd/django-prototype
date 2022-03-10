@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.core.paginator import Paginator
-from django.core.mail import BadHeaderError, send_mail
+from django.core.mail import send_mail
 
 from .forms import ContactForm
 from .models import Blogeintrag, Choice, Question, Startseite
@@ -95,17 +95,13 @@ def contactpage(request):
             subject = request.POST.get("subject")
             message = request.POST.get("message")
             from_email = request.POST.get("from_email")
-            if subject and message and from_email:
-                try:
-                    send_mail(
-                        subject, message, from_email, ["lanweilig11@googlemail.com"]
-                    )
-                except BadHeaderError:
-                    return HttpResponse("Invalid header found.")
+            captcha1 = request.POST.get("captcha")
+            captcha = int(captcha1)
+            if subject and message and from_email and captcha == 1:
+                send_mail(subject, message, from_email, ["lanweilig11@googlemail.com"])
                 return HttpResponseRedirect("response_email")
             else:
                 form = ContactForm()
-                return HttpResponseRedirect("response_email")
 
     context = {"form": form}
     return render(request, "blog/contactpage.html", context)
