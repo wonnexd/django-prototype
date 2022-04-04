@@ -5,19 +5,19 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 
 from .forms import ContactForm
-from .models import Blogeintrag, Choice, Question, Startseite
+from .models import Choice, Question, Startpage_model, Blogpost
 
 
-def home(request):
-    startseite_query = Startseite.objects.all()
-    context = {"startseite_query": startseite_query}
-    return render(request, "blog/home.html", context)
+def Startpage(request):
+    Startpage_query = Startpage_model.objects.all()
+    context = {"Startpage_query": Startpage_query}
+    return render(request, "blog/Startpage.html", context)
 
 
-def umfrage(request):
+def poll(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     context = {"latest_question_list": latest_question_list}
-    return render(request, "blog/umfrage.html", context)
+    return render(request, "blog/poll.html", context)
 
 
 def detail(request, question_id):
@@ -48,6 +48,38 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse("blog:results", args=(question.id,)))
 
 
+def blog(request):
+    all_blogs = Blogpost.objects.order_by("-pub_date")
+    most_viewed_blogs = Blogpost.objects.order_by("-view_counter")[:2]
+    paginator = Paginator(all_blogs, 3)
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        "all_blogs": all_blogs,
+        "most_viewed_blogs": most_viewed_blogs,
+        "page_obj": page_obj,
+    }
+    return render(request, "blog/blog.html", context)
+
+
+def blogdetail(request, Blogpost_id):
+    chosen_Blogpost = get_object_or_404(Blogpost, pk=Blogpost_id)
+    most_viewed_blogs = Blogpost.objects.order_by("-view_counter")[:2]
+
+    blog_object = Blogpost.objects.get(id=Blogpost_id)
+    blog_object.view_counter = blog_object.view_counter + 1
+    blog_object.save()
+
+    context = {
+        "blog_object": blog_object,
+        "chosen_Blogpost": chosen_Blogpost,
+        "most_viewed_blogs": most_viewed_blogs,
+    }
+    return render(request, "blog/blogdetail.html", context)
+
+
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
 
@@ -55,36 +87,6 @@ def results(request, question_id):
         "question": question,
     }
     return render(request, "blog/results.html", context)
-
-
-def blog(request):
-    latest_blog = Blogeintrag.objects.order_by("-view_counter")[:3]
-    paginator = Paginator(latest_blog, 3)
-
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-
-    context = {
-        "latest_blog": latest_blog,
-        "page_obj": page_obj,
-    }
-    return render(request, "blog/blog.html", context)
-
-
-def blogdetail(request, blogeintrag_id):
-    latest_blog = Blogeintrag.objects.order_by("-view_counter")[:3]
-    blogeintrag = get_object_or_404(Blogeintrag, pk=blogeintrag_id)
-
-    blog_object = Blogeintrag.objects.get(id=blogeintrag_id)
-    blog_object.view_counter = blog_object.view_counter + 1
-    blog_object.save()
-
-    context = {
-        "blog_object": blog_object,
-        "blogeintrag": blogeintrag,
-        "latest_blog": latest_blog,
-    }
-    return render(request, "blog/blogdetail.html", context)
 
 
 def contactpage(request):

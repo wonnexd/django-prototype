@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import Question, Choice, Blogeintrag, Startseite
+from .models import Question, Choice, Blogpost, Startpage_model
 
 
 admin.site.register(Question)
 admin.site.register(Choice)
-admin.site.register(Blogeintrag)
-admin.site.register(Startseite)
+admin.site.register(Blogpost)
+admin.site.register(Startpage_model)

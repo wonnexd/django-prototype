@@ -5,16 +5,16 @@
 <div class="row mt-5">
 
     <div class="col-sm-12 col-lg-9">
-        {% if latest_blog %}
+        {% if all_blogs %}
 
-        {% for Blogeintrag in page_obj %}
-        <div>
+        {% for Blogpost in page_obj %}
+        <div class="mb-3">
             <h1 class="text-center">
-                {{ Blogeintrag.title }}
+                {{ Blogpost.title }}
             </h1>
             </br>
-            {{ Blogeintrag.previewtext|safe }}
-            <a href="{% url 'blog:blogdetail' Blogeintrag.id %}">Mehr lesen</a>
+            {{ Blogpost.previewtext|safe }}
+            <a href="{% url 'blog:blogdetail' Blogpost.id %}">Mehr lesen</a>
         </div>
         {% endfor %}
 
@@ -41,23 +41,24 @@
                 </div>
             </span>
         </div>
+
     </div>
 
     <div class="col-sm-12 col-lg-3">
         <h3 class="text-center fst-italic"> Most Viewed </h3>
-        {% for Blogeintrag in latest_blog %}
+        {% for Blogpost in most_viewed_blogs %}
         <div class="list-group">
-            <a href="{% url 'blog:blogdetail' Blogeintrag.id %}" class="list-group-item list-group-item-action"
+            <a href="{% url 'blog:blogdetail' Blogpost.id %}" class="list-group-item list-group-item-action"
                 aria-current="true">
                 <div class="row mb-3">
                     <div class="col-8">
-                        <h4 class="mb-1">{{ Blogeintrag.title }}</h4>
+                        <h4 class="mb-1">{{ Blogpost.title }}</h4>
                     </div>
                     <div class="col-4">
-                        <small>{{ Blogeintrag.pub_date|timesince }} ago</small>
+                        <small>{{ Blogpost.pub_date|timesince }} ago</small>
                     </div>
                 </div>
-                <p class="mb-1">{{ Blogeintrag.sidetext|safe }} </p>
+                <p class="mb-1">{{ Blogpost.sidetext|safe }} </p>
             </a>
         </div>
         {% endfor %}

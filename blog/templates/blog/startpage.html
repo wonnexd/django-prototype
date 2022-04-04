@@ -6,9 +6,9 @@
 
 <div class="row mt-3 mb-3">
     <div class="col-sm-12 col-lg-8">
-        {% for Startseite in startseite_query %}
+        {% for Startpage_model in Startpage_query %}
 
-        {{ Startseite.inhalt|safe }}
+        {{ Startpage_model.inhalt|safe }}
 
         {% endfor %}
     </div>

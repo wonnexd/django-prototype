@@ -3,7 +3,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 
-class Blogeintrag(models.Model):
+class Blogpost(models.Model):
     title = models.CharField(max_length=200, default="")
     maintext = RichTextField(null=True)
     previewtext = RichTextField(max_length=1000, null=True)
@@ -15,7 +15,7 @@ class Blogeintrag(models.Model):
         return self.title
 
 
-class Startseite(models.Model):
+class Startpage_model(models.Model):
     inhalt = RichTextField(null=True)
 
 

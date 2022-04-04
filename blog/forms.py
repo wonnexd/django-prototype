@@ -1,6 +1,6 @@
 from django import forms
 from blog.models import Choice
-from django.forms import ModelForm, SelectMultiple, Textarea
+from django.forms import ModelForm, Textarea
 
 
 class ContactForm(forms.Form):
@@ -9,7 +9,6 @@ class ContactForm(forms.Form):
             attrs={
                 "class": "form-control",
                 "style": "width: 100%",
-                "placeholder": "Worum geht es?",
             }
         )
     )
@@ -18,7 +17,6 @@ class ContactForm(forms.Form):
             attrs={
                 "class": "form-control",
                 "style": "width: 100%",
-                "placeholder": "Emailadresse",
             }
         )
     )
@@ -27,14 +25,13 @@ class ContactForm(forms.Form):
             attrs={
                 "class": "form-control",
                 "style": "width: 100%",
-                "placeholder": "Ihre Nachricht hier",
             }
         )
     )
     captcha = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
-                "placeholder": "Bitte 1 eintragen",
+                "placeholder": "Please fill in 1",
             }
         )
     )
