@@ -1,12 +1,9 @@
-.ResponsiveBottom{
+.ResponsiveBottom {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-.footer{
+
+.ResponsiveBottom2 {
     margin-top: auto;
 }
-
-.backgroundpicture {
-    background-image: url("");
-   }

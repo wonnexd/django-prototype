@@ -8,10 +8,10 @@ from .forms import ContactForm
 from .models import Choice, Question, Startpage_model, Blogpost
 
 
-def Startpage(request):
+def startpage(request):
     Startpage_query = Startpage_model.objects.all()
     context = {"Startpage_query": Startpage_query}
-    return render(request, "blog/Startpage.html", context)
+    return render(request, "blog/startpage.html", context)
 
 
 def poll(request):
