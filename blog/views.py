@@ -1,11 +1,13 @@
+from hashlib import new
+from click import command
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 
-from .forms import ContactForm
-from .models import Choice, Question, Startpage_model, Blogpost
+from .forms import ContactForm, CommentForm
+from .models import Choice, Question, Startpage_model, Blogpost, Comment
 
 
 def startpage(request):
@@ -67,15 +69,28 @@ def blog(request):
 def blogdetail(request, Blogpost_id):
     chosen_Blogpost = get_object_or_404(Blogpost, pk=Blogpost_id)
     most_viewed_blogs = Blogpost.objects.order_by("-view_counter")[:2]
+    all_comments = Comment.objects.filter(blogpost_id=Blogpost_id)
+    new_comment = ""
+
+    form = CommentForm()
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.blogpost_id = Blogpost_id
+            new_comment.save()
 
     blog_object = Blogpost.objects.get(id=Blogpost_id)
     blog_object.view_counter = blog_object.view_counter + 1
     blog_object.save()
 
     context = {
+        "form": form,
+        "all_comments": all_comments,
         "blog_object": blog_object,
         "chosen_Blogpost": chosen_Blogpost,
         "most_viewed_blogs": most_viewed_blogs,
+        "new_comment": new_comment,
     }
     return render(request, "blog/blogdetail.html", context)
 

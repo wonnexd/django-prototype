@@ -1,6 +1,6 @@
 from django import forms
-from blog.models import Choice
-from django.forms import ModelForm, Textarea
+from blog.models import Choice, Comment
+from django.forms import IntegerField, ModelForm, NumberInput, Textarea, TextInput
 
 
 class ContactForm(forms.Form):
@@ -46,3 +46,30 @@ class ChoiceForm(ModelForm):
 widgets = {
     "choice_text": Textarea(attrs={"cols": 80, "rows": 20}),
 }
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["name", "text", "captcha"]
+        widgets = {
+            "name": TextInput(
+                attrs={
+                    "class": "form-control",
+                    "style": "width: 100%;",
+                    "placeholder": "name",
+                }
+            ),
+            "text": Textarea(
+                attrs={
+                    "class": "form-control",
+                    "style": "widht: 100%;",
+                    "placeholder": "comment",
+                }
+            ),
+            "captcha": NumberInput(
+                attrs={
+                    "placeholder": "Please fill in 1",
+                }
+            ),
+        }

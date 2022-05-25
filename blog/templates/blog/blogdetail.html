@@ -17,6 +17,25 @@
                 Zurück zu allen Blogs
             </button>
         </a>
+
+        <div class="mb-5">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit">
+                {% for Comment in all_comments %}
+                <div class="fs-4 mt-3">
+                    {{ Comment.name }}
+                </div>
+                <div class="mb-2 small_date">
+                    {{ Comment.pub_date }}
+                </div>
+                <div>
+                    {{ Comment.text }}
+                </div>
+            </form>
+            {% endfor %}
+        </div>
     </div>
 
     <div class="col-sm-12 col-lg-3">
