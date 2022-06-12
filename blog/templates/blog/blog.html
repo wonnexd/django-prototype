@@ -14,7 +14,7 @@
             </h1>
             </br>
             {{ Blogpost.previewtext|safe }}
-            <a href="{% url 'blog:blogdetail' Blogpost.id %}">Mehr lesen</a>
+            <a href="{% url 'blog:blogdetail' Blogpost.id %}">Read more</a>
         </div>
         {% endfor %}
 
@@ -58,7 +58,7 @@
                         <small>{{ Blogpost.pub_date|timesince }} ago</small>
                     </div>
                 </div>
-                <p class="mb-1">{{ Blogpost.sidetext|safe }} </p>
+                <p class="mb-1">{{ Blogpost.previewtext|safe }} </p>
             </a>
         </div>
         {% endfor %}

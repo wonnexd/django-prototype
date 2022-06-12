@@ -64,6 +64,7 @@ class CommentForm(ModelForm):
                 attrs={
                     "class": "form-control",
                     "style": "widht: 100%;",
+                    "rows": 4,
                     "placeholder": "comment",
                 }
             ),

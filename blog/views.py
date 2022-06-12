@@ -1,5 +1,3 @@
-from hashlib import new
-from click import command
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -78,7 +76,8 @@ def blogdetail(request, Blogpost_id):
         if form.is_valid():
             new_comment = form.save(commit=False)
             new_comment.blogpost_id = Blogpost_id
-            new_comment.save()
+            if new_comment.captcha == 1:
+                new_comment.save()
 
     blog_object = Blogpost.objects.get(id=Blogpost_id)
     blog_object.view_counter = blog_object.view_counter + 1
@@ -117,8 +116,6 @@ def contactpage(request):
             if subject and message and from_email and captcha == 1:
                 send_mail(subject, message, from_email, ["lanweilig11@googlemail.com"])
                 return HttpResponseRedirect("response_email")
-            else:
-                form = ContactForm()
 
     context = {"form": form}
     return render(request, "blog/contactpage.html", context)

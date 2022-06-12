@@ -3,12 +3,16 @@
 {% block content %}
 
 <div class="row mt-5">
+
     <div class="col-sm-12 col-lg-9">
         <h1 class="text-center">
             {{ chosen_Blogpost.title }}
         </h1>
         </br>
         {{ chosen_Blogpost.maintext|safe }}
+        </br>
+        </br>
+        {{ chosen_Blogpost.picture|safe }}
         </br>
         {{ chosen_Blogpost.pub_date}}
         </br>
@@ -52,7 +56,7 @@
                         <small>{{ Blogpost.pub_date|timesince }} ago</small>
                     </div>
                 </div>
-                <p class="mb-1">{{ Blogpost.sidetext|safe }} </p>
+                <p class="mb-1">{{ Blogpost.previewtext|safe }} </p>
             </a>
         </div>
         {% endfor %}
