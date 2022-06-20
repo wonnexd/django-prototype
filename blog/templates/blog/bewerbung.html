@@ -1,0 +1,12 @@
+{% extends "basetemplate.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<embed src="{% static 'blog/images/Fachhochschulreife.pdf' %}" type="application/pdf" width="500" height="600">
+
+{% endif %}
+
+{% endblock %}

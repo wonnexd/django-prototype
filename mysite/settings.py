@@ -147,5 +147,5 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# für login
-LOGIN_REDIRECT_URL = "/"
+# redirect für login
+LOGIN_REDIRECT_URL = "http://127.0.0.1:8000/bewerbung"

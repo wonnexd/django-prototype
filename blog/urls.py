@@ -14,4 +14,5 @@ urlpatterns = [
     path("<int:Blogpost_id>", views.blogdetail, name="blogdetail"),
     path("contactpage", views.contactpage, name="contactpage"),
     path("response_email", views.response_email, name="response_email"),
+    path("bewerbung", views.bewerbung, name="bewerbung"),
 ]
