@@ -124,3 +124,8 @@ def contactpage(request):
 def response_email(request):
     context = {}
     return render(request, "blog/response_email.html", context)
+
+
+def application_papers(request):
+    context = {}
+    return render(request, "blog/application_papers.html", context)

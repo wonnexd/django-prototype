@@ -4,11 +4,22 @@
 
 <h1>{{ question.question_text }}</h1>
 
-<ul>
+<table class="table table-hover" id="table">
+    <thead>
+        <tr>
+            <th scope="col">Language</th>
+            <th scope="col">Votes</th>
+        </tr>
+    </thead>
     {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+    <tbody>
+        <tr id="{{ forloop.counter }}">
+            <th scope="row" id="language_name_{{ forloop.counter }}">{{ choice.choice_text }}</th>
+            <td id="language_counter_{{ forloop.counter }}">{{ choice.votes }} vote{{ choice.votes|pluralize }}</td>
+        </tr>
+    </tbody>
     {% endfor %}
-</ul>
+</table>
 
 <a href="{% url 'blog:detail' question.id %}">Vote again?</a>
 

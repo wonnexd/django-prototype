@@ -5,6 +5,7 @@ from . import views
 app_name = "blog"
 
 urlpatterns = [
+   path("application_papers", views.application_papers, name="application_papers"),
     path("", views.startpage, name="startpage"),
     path("poll", views.poll, name="poll"),
     path("<int:question_id>/", views.detail, name="detail"),

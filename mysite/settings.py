@@ -148,4 +148,4 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # für login
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/application_papers"
